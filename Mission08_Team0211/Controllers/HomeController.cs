@@ -24,7 +24,7 @@ namespace Mission08_Team0211.Controllers
         public IActionResult Create()
         {
             ViewBag.Categories = GetCategories();
-            return View();
+            return View("AddTask");
         }
 
         [HttpPost]
@@ -46,7 +46,7 @@ namespace Mission08_Team0211.Controllers
                 return NotFound();
             }
             ViewBag.Categories = GetCategories();
-            return View(task);
+            return View("Index", task);
         }
 
         [HttpPost]
