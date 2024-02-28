@@ -6,7 +6,7 @@ namespace Mission08_Team0211.Controllers
 {
     public class HomeController : Controller
     {
-        private TaskContext _context;
+        private readonly TaskContext _context;
 
         public HomeController(TaskContext temp)
         {
@@ -25,7 +25,7 @@ namespace Mission08_Team0211.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Categories = GetCategories();
+            ViewBag.Categories = GetCategories().AsQueryable();
             return View("AddTask");
         }
 
