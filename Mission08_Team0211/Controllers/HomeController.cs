@@ -29,14 +29,14 @@ namespace Mission08_Team0211.Controllers
             return View("AddTask");
         }
 
-        [HttpPost]
-        public IActionResult TaskList()
-        {
-            var tasks = _context.AllTasks
-            .Where(t => t.Completed != true);
+        //[HttpPost]
+        //public IActionResult TaskList()
+        //{
+        //    var tasks = _context.AllTasks
+        //    .Where(t => t.Completed != true);
 
-            return View(tasks);
-        }
+        //    return View(tasks);
+        //}
 
         [HttpGet]
         public IActionResult Edit(int id)
@@ -71,7 +71,7 @@ namespace Mission08_Team0211.Controllers
             {
                 return NotFound();
             }
-            return View(task);
+            return View("Success", task);
         }
 
         [HttpPost, ActionName("Delete")]
