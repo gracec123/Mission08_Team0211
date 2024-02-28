@@ -16,7 +16,9 @@ namespace Mission08_Team0211.Controllers
         public IActionResult Index()
         {
             // Display all tasks that have not been completed
-            var tasks = _context.Tasks.Where(t => t.Completed != true).ToList();
+            var tasks = _context.Tasks
+                                    .Where(t => t.Completed != true)
+                                    .ToList();
             return View(tasks);
         }
 
@@ -50,7 +52,7 @@ namespace Mission08_Team0211.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(MyTasks task)
+        public IActionResult Edit(AllTasks task)
         {
             if (ModelState.IsValid)
             {

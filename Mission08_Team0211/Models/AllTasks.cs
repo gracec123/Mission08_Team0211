@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission08_Team0211.Models
 {
-    public class MyTasks
+    public class AllTasks
     {
         [Key]
         public int TaskId { get; set; }
@@ -16,8 +16,8 @@ namespace Mission08_Team0211.Models
 
         [ForeignKey("CategoryId")]
         public Category? Category { get; set; }
-        
-        
+
+
         [DataType(DataType.Date)]
         public DateTime? DueDate { get; set; } = DateTime.Today;
 
