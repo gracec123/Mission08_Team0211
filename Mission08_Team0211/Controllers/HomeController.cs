@@ -6,27 +6,90 @@ namespace Mission08_Team0211.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly TaskContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(TaskContext temp)
         {
-            _logger = logger;
+            _context = temp;
         }
 
         public IActionResult Index()
         {
+            // Display all tasks that have not been completed
+            var tasks = _context.Tasks.Where(t => t.Completed != true).ToList();
+            return View(tasks);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewBag.Categories = GetCategories();
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult TaskList()
         {
-            return View();
+            var tasks = _context.AllTasks
+            .Where(t => t.Completed != true)
+            .ToList();
+
+            return View(tasks);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpGet]
+        public IActionResult Edit(int id)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var task = _context.Tasks.Find(id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+            ViewBag.Categories = GetCategories();
+            return View(task);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(MyTasks task)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.AllTasks.Update(task);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.Categories = GetCategories();
+            return View(task);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var task = _context.Tasks.Find(id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+            return View(task);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var task = _context.Tasks.Find(id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+            _context.Tasks.Remove(task);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        private List<string> GetCategories()
+        {
+            // You can populate this list with your predefined categories
+            return new List<string> { "Home", "School", "Work", "Church" };
         }
     }
 }

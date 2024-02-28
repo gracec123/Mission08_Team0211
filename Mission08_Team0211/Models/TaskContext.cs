@@ -13,6 +13,7 @@ namespace Mission08_Team0211.Models
         public DbSet<MyTasks> AllTasks { get; set; }
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<MyTasks> Tasks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) //Seed data
         {
