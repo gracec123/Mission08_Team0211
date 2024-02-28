@@ -6,7 +6,7 @@ namespace Mission08_Team0211.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly TaskContext _context;
+        private TaskContext _context;
 
         public HomeController(TaskContext temp)
         {
@@ -59,7 +59,7 @@ namespace Mission08_Team0211.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Categories = GetCategories();
-            return View(task);
+            return View("AddTask", task);
         }
 
         [HttpGet]
