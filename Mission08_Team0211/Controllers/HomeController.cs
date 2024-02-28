@@ -21,9 +21,12 @@ namespace Mission08_Team0211.Controllers
         }
 
         [HttpGet]
+        
         public IActionResult Create()
         {
             ViewBag.Categories = GetCategories();
+            //Access tasks
+            var tasks = _context.AllTasks.ToList();
             return View("AddTask");
         }
 
