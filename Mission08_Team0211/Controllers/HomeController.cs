@@ -33,8 +33,7 @@ namespace Mission08_Team0211.Controllers
         public IActionResult TaskList()
         {
             var tasks = _context.AllTasks
-            .Where(t => t.Completed != true)
-            .ToList();
+            .Where(t => t.Completed != true);
 
             return View(tasks);
         }
