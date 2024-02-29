@@ -21,7 +21,7 @@ namespace Mission08_Team0211.Controllers
         }
 
         [HttpGet]
-        
+
         public IActionResult Create()
         {
 
@@ -40,12 +40,11 @@ namespace Mission08_Team0211.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Categories = GetCategories();
+
+            ViewBag.Categories = 
             return View("AddTask", task);
         }
-            ViewBag.Categories = GetCategories().AsQueryable();
-            return View("AddTask");
-        }
+
 
         //[HttpPost]
         //public IActionResult TaskList()
@@ -65,6 +64,7 @@ namespace Mission08_Team0211.Controllers
             {
                 return NotFound();
             }
+
             ViewBag.Categories = GetCategories();
             return View("Index", task);
         }
@@ -78,6 +78,7 @@ namespace Mission08_Team0211.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             ViewBag.Categories = GetCategories();
             return View("AddTask", task);
         }
@@ -90,6 +91,7 @@ namespace Mission08_Team0211.Controllers
             {
                 return NotFound();
             }
+
             return View("Success", task);
         }
 
@@ -101,16 +103,13 @@ namespace Mission08_Team0211.Controllers
             {
                 return NotFound();
             }
+
             _context.Tasks.Remove(task);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        private List<string> GetCategories()
-        {
-            // Retrieve categories from the database
-            var categories = _context.Categories.Select(c => c.CategoryName).ToList();
-            return categories;
-        }
     }
 }
+
+
