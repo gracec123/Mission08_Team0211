@@ -54,7 +54,7 @@ namespace Mission08_Team0211.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Mission08_Team0211.Models.MyTasks", b =>
+            modelBuilder.Entity("Mission08_Team0211.Models.AllTasks", b =>
                 {
                     b.Property<int>("TaskId")
                         .ValueGeneratedOnAdd()
@@ -83,7 +83,7 @@ namespace Mission08_Team0211.Migrations
                     b.ToTable("AllTasks");
                 });
 
-            modelBuilder.Entity("Mission08_Team0211.Models.MyTasks", b =>
+            modelBuilder.Entity("Mission08_Team0211.Models.AllTasks", b =>
                 {
                     b.HasOne("Mission08_Team0211.Models.Category", "Category")
                         .WithMany()

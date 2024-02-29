@@ -6,7 +6,7 @@ namespace Mission08_Team0211.Controllers
 {
     public class HomeController : Controller
     {
-        private TaskContext _context;
+        private readonly TaskContext _context;
 
         public HomeController(TaskContext temp)
         {
@@ -24,6 +24,7 @@ namespace Mission08_Team0211.Controllers
         
         public IActionResult Create()
         {
+
             ViewBag.Categories = GetCategories();
             //Access tasks
             var tasks = _context.AllTasks.ToList();
@@ -41,6 +42,9 @@ namespace Mission08_Team0211.Controllers
             }
             ViewBag.Categories = GetCategories();
             return View("AddTask", task);
+        }
+            ViewBag.Categories = GetCategories().AsQueryable();
+            return View("AddTask");
         }
 
         //[HttpPost]
@@ -66,7 +70,7 @@ namespace Mission08_Team0211.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(MyTasks task)
+        public IActionResult Edit(AllTasks task)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +90,7 @@ namespace Mission08_Team0211.Controllers
             {
                 return NotFound();
             }
-            return View(task);
+            return View("Success", task);
         }
 
         [HttpPost, ActionName("Delete")]

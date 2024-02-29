@@ -5,12 +5,12 @@
     ViewData["Title"] = "Add Task";
 }
 
-@model MyTasks
+@model AllTasks
 
 
 <h1>Create New Task</h1>
 
-<form asp-action="AddTask">
+<form asp-action="Create">
     <div class="form-group">
         <label asp-for="Name">Name</label>
         <input asp-for="Name" class="form-control" />
