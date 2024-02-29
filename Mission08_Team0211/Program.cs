@@ -13,6 +13,7 @@ builder.Services.AddDbContext<TaskContext>(options =>
 
 });
 
+builder.Services.AddScoped<ITaskRepo, EFTaskRepo>();
 
 var app = builder.Build();
 
