@@ -31,14 +31,27 @@ namespace Mission08_Team0211.Controllers
         }
 
         [HttpPost]
-        public IActionResult TaskList()
+        public IActionResult Create(Task task)
         {
-            var tasks = _context.AllTasks
-            .Where(t => t.Completed != true)
-            .ToList();
-
-            return View(tasks);
+            if (ModelState.IsValid)
+            {
+                _context.Tasks.Add(task);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.Categories = GetCategories();
+            return View("AddTask", task);
         }
+
+        //[HttpPost]
+        //public IActionResult TaskList()
+        //{
+        //    var tasks = _context.AllTasks
+        //    .Where(t => t.Completed != true)
+        //    .ToList();
+
+        //    return View(tasks);
+        //}
 
         [HttpGet]
         public IActionResult Edit(int id)
@@ -91,8 +104,9 @@ namespace Mission08_Team0211.Controllers
 
         private List<string> GetCategories()
         {
-            // You can populate this list with your predefined categories
-            return new List<string> { "Home", "School", "Work", "Church" };
+            // Retrieve categories from the database
+            var categories = _context.Categories.Select(c => c.CategoryName).ToList();
+            return categories;
         }
     }
 }
