@@ -91,7 +91,7 @@ namespace Mission08_Team0211.Controllers
             return View("Index");
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Delete")] 
         public IActionResult DeleteConfirmed(int id)
         {
             _context.DeleteTask(id);
