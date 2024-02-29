@@ -16,7 +16,7 @@ namespace Mission08_Team0211.Controllers
         public IActionResult Index()
         {
             // Display all tasks that have not been completed
-            var tasks = _context.Tasks.Where(t => t.Completed != true).ToList();
+            var tasks = _context.AllTasks.Where(t => t.Completed != true).ToList();
             return View(tasks);
         }
 
@@ -25,23 +25,20 @@ namespace Mission08_Team0211.Controllers
         public IActionResult Create()
         {
 
-            ViewBag.Categories = GetCategories();
-            //Access tasks
-            var tasks = _context.AllTasks.ToList();
-            return View("AddTask");
+            ViewBag.Categories = _context.Categories.ToList();
+            return View("AddTask", new AllTasks());
         }
 
         [HttpPost]
-        public IActionResult Create(Task task)
+        public IActionResult Create(AllTasks task)
         {
             if (ModelState.IsValid)
             {
-                _context.Tasks.Add(task);
-                _context.SaveChanges();
+                _context.AddTask(task);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Categories = 
+            ViewBag.Categories = _context.Categories;
             return View("AddTask", task);
         }
 
@@ -59,14 +56,14 @@ namespace Mission08_Team0211.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var task = _context.Tasks.Find(id);
+            var task = _context.AllTasks.FirstOrDefault(t => t.TaskId == id);
             if (task == null)
             {
                 return NotFound();
             }
 
-            ViewBag.Categories = GetCategories();
-            return View("Index", task);
+            ViewBag.Categories = _context.Categories;
+            return View("AddTask", task); //
         }
 
         [HttpPost]
@@ -74,38 +71,30 @@ namespace Mission08_Team0211.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.AllTasks.Update(task);
-                _context.SaveChanges();
+                _context.EditTask(task);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Categories = GetCategories();
-            return View("AddTask", task);
+            ViewBag.Categories = _context.Categories;
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var task = _context.Tasks.Find(id);
+            var task = _context.AllTasks.FirstOrDefault(t => t.TaskId == id);
             if (task == null)
             {
                 return NotFound();
             }
 
-            return View("Success", task);
+            return View("Index");
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            var task = _context.Tasks.Find(id);
-            if (task == null)
-            {
-                return NotFound();
-            }
-
-            _context.Tasks.Remove(task);
-            _context.SaveChanges();
+            _context.DeleteTask(id);
             return RedirectToAction("Index");
         }
 

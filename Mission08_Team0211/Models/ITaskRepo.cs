@@ -3,6 +3,7 @@
     public interface ITaskRepo
     {
         List<Category> Categories { get; }
+        List<AllTasks> AllTasks { get; }
 
 
         void AddTask(AllTasks task);

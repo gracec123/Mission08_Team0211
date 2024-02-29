@@ -13,7 +13,7 @@ namespace Mission08_Team0211.Models
         public DbSet<AllTasks> AllTasks { get; set; }
 
         public DbSet<Category> Categories { get; set; }
-        public DbSet<AllTasks> Tasks { get; set; }
+       // public DbSet<AllTasks> Tasks { get; set; }
 
 
     }
