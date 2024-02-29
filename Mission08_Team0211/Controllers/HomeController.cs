@@ -6,9 +6,9 @@ namespace Mission08_Team0211.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly TaskContext _context;
+        private readonly ITaskRepo _context;
 
-        public HomeController(TaskContext temp)
+        public HomeController(ITaskRepo temp)
         {
             _context = temp;
         }

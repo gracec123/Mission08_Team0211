@@ -11,13 +11,13 @@ namespace Mission08_Team0211.Models
         }
         public List<Category> Categories => _context.Categories.ToList();
 
-        public void AddTask(MyTasks task)
+        public void AddTask(AllTasks task)
         {
             _context.AllTasks.Add(task); 
             _context.SaveChanges();
         }
 
-        public void EditTask(MyTasks task)
+        public void EditTask(AllTasks task)
         {
             _context.AllTasks.Update(task); 
             _context.SaveChanges(); 

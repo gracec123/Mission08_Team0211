@@ -5,8 +5,8 @@
         List<Category> Categories { get; }
 
 
-        void AddTask(MyTasks task);
-        void EditTask(MyTasks task);
+        void AddTask(AllTasks task);
+        void EditTask(AllTasks task);
         void DeleteTask(int taskId);
     }
 }
