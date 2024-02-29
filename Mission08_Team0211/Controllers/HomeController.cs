@@ -16,15 +16,33 @@ namespace Mission08_Team0211.Controllers
         public IActionResult Index()
         {
             // Display all tasks that have not been completed
-            var tasks = _context.Tasks
-                                    .Where(t => t.Completed != true)
-                                    .ToList();
+            var tasks = _context.Tasks.Where(t => t.Completed != true).ToList();
             return View(tasks);
         }
 
         [HttpGet]
+        
         public IActionResult Create()
         {
+
+            ViewBag.Categories = GetCategories();
+            //Access tasks
+            var tasks = _context.AllTasks.ToList();
+            return View("AddTask");
+        }
+
+        [HttpPost]
+        public IActionResult Create(Task task)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Tasks.Add(task);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.Categories = GetCategories();
+            return View("AddTask", task);
+        }
             ViewBag.Categories = GetCategories().AsQueryable();
             return View("AddTask");
         }
@@ -33,7 +51,8 @@ namespace Mission08_Team0211.Controllers
         //public IActionResult TaskList()
         //{
         //    var tasks = _context.AllTasks
-        //    .Where(t => t.Completed != true);
+        //    .Where(t => t.Completed != true)
+        //    .ToList();
 
         //    return View(tasks);
         //}
@@ -89,8 +108,9 @@ namespace Mission08_Team0211.Controllers
 
         private List<string> GetCategories()
         {
-            // You can populate this list with your predefined categories
-            return new List<string> { "Home", "School", "Work", "Church" };
+            // Retrieve categories from the database
+            var categories = _context.Categories.Select(c => c.CategoryName).ToList();
+            return categories;
         }
     }
 }
