@@ -1,22 +1,101 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
+/* Base style for your navigation links */
+.nav-link {
+    position: relative; /* Required for absolute positioning of pseudo-elements */
+    text-decoration: none;
+    color: black; /* Or any color you'd like */
+    padding: 5px 0; /* Add some padding to give space for the border */
+    overflow: hidden; /* Ensures the pseudo-element won't be visible initially */
+}
+
+.nav-link:hover {
+    color: red;
+}
+
+/* Pseudo-element for the animated border */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%; /* Start with a width of 0 */
+    height: 3px; /* Height of the border */
+
+    background-color: red; /* Color of the border */
+    transition: width 0.3s ease; /* Animates the width */
+}
+
+/* Hover effect */
+.nav-link:hover::after {
+    width: 100%; /* Full width on hover */
+}
+
+.navbar-nav {
+    gap: 1rem;
+}
+
+.form-custom {
+    max-width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.25rem;
+    background-color: #98a4a76e;
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+
+main {
+    margin-top: 2rem;
+}
+
+.form-group {
+    display: inline-grid;
+    gap: 0.75rem;
+    grid-template-columns: 1fr 4fr;
+}
+
+.form-group label {
+    align-self: center;
+    font-weight: bolder;
+    font-size: large;
+}
+
+.radio {
+    display: inline-flex;
+}
+
+@media (max-width: 868px) {
+    .form-custom {
+        max-width: 90%;
+    }
+
+    .form-group {
+        grid-template-columns: 1fr;
+    }
+}
+

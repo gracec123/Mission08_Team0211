@@ -8,15 +8,14 @@
 @model AllTasks
 
 
-<h1>@ViewBag.Title</h1>
+<h1 class="text-center">@ViewBag.Title</h1>
 
-<form method="post">
+<form method="post" class="form-custom">
     <input type="hidden" id="taskId" name="taskId" value="@Model.TaskId"/>
 
     <div class="form-group">
         <label asp-for="Name">Name</label>
-        <input asp-for="Name" class="form-control" value="@Model.Name"/>
-        <span asp-validation-for="Name" class="text-danger"></span>
+        <input asp-for="Name" class="form-control" value="@Model.Name" required="required"/>
     </div>
 
     <div class="form-group">
@@ -31,17 +30,15 @@
 
     <div class="form-group">
         <label asp-for="DueDate"></label>
-        <input asp-for="DueDate" class="form-control" value="@Model.DueDate"/>
-        <span asp-validation-for="DueDate" class="text-danger"></span>
+        <input asp-for="DueDate" class="form-control" value="@Model.DueDate" required="required"/>
     </div>
 
     <div class="form-group">
         <label asp-for="Quadrant"></label>
-        <input asp-for="Quadrant" class="form-control" value="@Model.Quadrant"/>
-        <span asp-validation-for="Quadrant" class="text-danger"></span>
+        <input asp-for="Quadrant" class="form-control" value="@Model.Quadrant" required="required"/>
     </div>
 
-    <div class="form-group">
+    <div class="form-group radio">
         <label asp-for="Completed">Completed:</label>
         @if (Model.Completed == true)
         {
