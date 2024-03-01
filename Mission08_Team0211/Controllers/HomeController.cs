@@ -74,7 +74,8 @@ public class HomeController : Controller
         var task = _context.AllTasks.FirstOrDefault(t => t.TaskId == id);
         if (task == null) return NotFound();
 
-        return View("Index");
+        return View("Delete", task);
+
     }
 
     [HttpPost]
