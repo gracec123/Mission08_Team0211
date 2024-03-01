@@ -7,6 +7,7 @@ public class HomeController : Controller
 {
     private readonly ITaskRepo _context;
 
+    // Controller responsible for handling actions related to tasks
     public HomeController(ITaskRepo temp)
     {
         _context = temp;
@@ -19,6 +20,8 @@ public class HomeController : Controller
         return View(tasks);
     }
 
+
+    // Displays form to create a new task
     [HttpGet]
     public IActionResult Create()
     {
@@ -28,6 +31,7 @@ public class HomeController : Controller
         return View("AddTask", new AllTasks());
     }
 
+    // Handles creation of a new task
     [HttpPost]
     public IActionResult Create(AllTasks task)
     {
@@ -43,7 +47,7 @@ public class HomeController : Controller
         return View("AddTask", task);
     }
 
-
+    // Displays form to edit an existing task
     [HttpGet]
     public IActionResult Edit(int id)
     {
@@ -55,6 +59,7 @@ public class HomeController : Controller
         return View("AddTask", task); //
     }
 
+    // Handles editing an existing task
     [HttpPost]
     public IActionResult Edit(AllTasks task)
     {
@@ -68,6 +73,7 @@ public class HomeController : Controller
         return RedirectToAction("Index");
     }
 
+    // Displays confirmation page for deleting a task
     [HttpGet]
     public IActionResult Delete(int id)
     {
@@ -78,6 +84,7 @@ public class HomeController : Controller
         return View(task);
     }
 
+    // Handles deletion of a task
     [HttpPost]
     [ActionName("Delete")]
     public IActionResult DeleteConfirmed(int id)
