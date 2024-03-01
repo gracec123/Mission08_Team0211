@@ -8,13 +8,14 @@
 @model AllTasks
 
 
-<h1>Create New Task</h1>
+<h1>@ViewBag.Title</h1>
 
-<form asp-action="Create">
+<form method="post">
+    <input type="hidden" id="taskId" name="taskId" value="@Model.TaskId"/>
 
     <div class="form-group">
         <label asp-for="Name">Name</label>
-        <input asp-for="Name" class="form-control" />
+        <input asp-for="Name" class="form-control" value="@Model.Name"/>
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
@@ -30,25 +31,32 @@
 
     <div class="form-group">
         <label asp-for="DueDate"></label>
-        <input asp-for="DueDate" class="form-control" />
+        <input asp-for="DueDate" class="form-control" value="@Model.DueDate"/>
         <span asp-validation-for="DueDate" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Quadrant"></label>
-        <input asp-for="Quadrant" class="form-control" />
+        <input asp-for="Quadrant" class="form-control" value="@Model.Quadrant"/>
         <span asp-validation-for="Quadrant" class="text-danger"></span>
     </div>
 
-@*     <div class="form-group">
-        <label asp-for="Completed"></label>
-        <input type="checkbox" asp-for="Completed" class="form-control" />
-        <span asp-validation-for="Completed" class="text-danger"></span>
-    </div> *@
-
-    <label asp-for="Completed">Completed:</label><br>
-    <input type="radio" asp-for="Completed" value="true">Yes
-    <input type="radio" asp-for="Completed" value="false">No<br>
-
+    <div class="form-group">
+        <label asp-for="Completed">Completed:</label>
+        @if (Model.Completed == true)
+        {
+            <input type="radio" id="completedYes" name="Completed" value="true" asp-for="Completed" checked="checked"/>
+            <label for="completedYes">Yes</label>
+            <input type="radio" id="completedNo" name="Completed" value="false" asp-for="Completed"/>
+            <label for="completedNo">No</label>
+        }
+        else
+        {
+            <input type="radio" id="completedYes" name="Completed" value="true" asp-for="Completed"/>
+            <label for="completedYes">Yes</label>
+            <input type="radio" id="completedNo" name="Completed" value="false" asp-for="Completed"checked="checked"/>
+            <label for="completedNo">No</label>
+        }
+    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
